@@ -1,0 +1,77 @@
+
+include components/head.pug
+include components/header.pug
+
+// Breadcrumb section start
+section.breadcrumb-section.section-b-space
+  ul.circles
+    li
+    li
+    li
+    li
+    li
+    li
+    li
+    li
+    li
+    li
+  .container
+    .row
+      .col-12
+        h3 Корзина
+        nav
+          ol.breadcrumb
+            li.breadcrumb-item Будем рады видеть вас у нас в офисе, <br /> ответить на любые вопросы, показать интересующий вас товар.
+// Breadcrumb section end
+
+// Cart Section Start
+section.cart-section.section-b-space
+  .container
+    .row
+      .col-sm-12.table-responsive.mt-4
+        if userCart.length === 0
+          p Корзина пуста.
+        else
+          table.table.cart-table
+            thead
+              tr.table-head
+                th(scope='col') картинка
+                th(scope='col') название
+                th(scope='col') цена
+                th(scope='col') действие
+            tbody
+              each item in userCart
+                tr
+                  td
+                    a(href=`/product/${item.id}`)
+                      img.blur-up.lazyload(src=`${item.url}` alt=`${item.name}`)
+                  td
+                    a(href=`/product/${item.id}`) #{item.name}
+                    .mobile-cart-content.row
+                      .col
+                        h2 #{item.price}₽
+                      .col
+                        h2.td-color
+                          a(href='javascript:void(0)' class='remove-item' data-id=`${item.id}`)
+                            i.fas.fa-times
+                  td
+                    h2 #{item.price}₽
+                  td
+                    a(href='javascript:void(0)' class='remove-item' data-id=`${item.id}`)
+                      i.fas.fa-times
+      .col-12.mt-md-5.mt-4
+        .row
+          .col-sm-7.col-5.order-1
+            .left-side-button.text-end.d-flex.d-block.justify-content-end
+              a.text-decoration-underline.theme-color.d-block.text-capitalize(href='javascript:void(0)' class='clear-cart') Очистить корзину
+          .col-sm-5.col-7
+            .left-side-button.float-start
+              a.btn.btn-solid-default.btn.fw-bold.mb-0.ms-0(href='/')
+                i.fas.fa-arrow-left
+                |  Назад
+// Cart Section End
+
+include components/footer.pug
+include components/scripts.pug
+       
+

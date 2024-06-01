@@ -1,0 +1,47 @@
+Добавь репозиторий
+sudo apt-add-repository ppa:fish-shell/release-3
+
+Обнови пакеты репозитория
+sudo apt update && sudo apt upgrade
+
+Установи Fish Shell
+sudo apt install fish
+
+Установи Fish Shell в качестве оболочки по умолчанию
+which fish
+sudo chsh -s /usr/bin/fish <user>
+
+Скачай и установи менеджер плагинов oh-my-fish
+curl https://raw.githubusercontent.com/oh-my-fish/oh-my-fish/master/bin/install | fish
+
+Установи плагины
+omf install z
+omf install nvm
+
+Скачай и установи starship для fish shell
+curl -sS https://starship.rs/install.sh | sh
+
+Добавьте в конец файла ~/.config/fish/config.fish
+starship init fish | source
+
+Создай файл для плагина starship вот с такими настройками
+----------------------------------------------------------------------
+# Get editor completions based on the config schema
+"$schema" = 'https://starship.rs/config-schema.json'
+
+# Inserts a blank line between shell prompts
+add_newline = true
+
+# Replace the '❯' symbol in the prompt with '➜'
+[character] # The name of the module we are configuring is 'character'
+success_symbol = '[⋊>](green)' # The 'success_symbol' segment is being set to '➜' with the color 'bold green'
+error_symbol = '[⋊>](red)'
+
+# Disable the package module, hiding it from the prompt completely
+[package]
+disabled = false
+----------------------------------------------------------------------
+
+Он должен быть здесь
+~/.config/starship.toml
+

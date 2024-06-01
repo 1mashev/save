@@ -1,0 +1,7 @@
+
+В теме https://github.com/alacritty/alacritty-theme вот здесь
+~/.config/alacritty/themes/themes/oceanic_next.toml
+
+Был заменен цвет
+background = '#171d20'
+

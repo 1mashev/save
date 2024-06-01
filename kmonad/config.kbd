@@ -1,0 +1,83 @@
+(defcfg
+  input  (device-file "/dev/input/by-id/usb-SIGMACHIP_USB_Keyboard-event-kbd")
+  output (uinput-sink "KMonad output")
+
+  allow-cmd true
+)
+
+(defsrc
+  esc  f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12        ssrq slck pause
+  grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc  ins  home pgup  nlck kp/  kp*  kp-
+  tab  q    w    e    r    t    y    u    i    o    p    [    ]    ret   del  end  pgdn  kp7  kp8  kp9  kp+
+  caps a    s    d    f    g    h    j    k    l    ;    '    \                          kp4  kp5  kp6
+  lsft 102d z    x    c    v    b    n    m    ,    .    /    rsft            up         kp1  kp2  kp3  kprt
+  lctl lmet lalt           spc                 ralt rmet cmp  rctl       left down rght  kp0  kp.
+)
+
+(defalias
+  ralt (layer-toggle           is_ralt_pressed)
+  lmet (layer-toggle           is_lmet_pressed)
+
+  ;; Alt-tab like windows start
+  when-releasing (tap-macro-release #((layer-rem alt-ed) (release-only lalt)))
+  lalt (around (layer-toggle is_lalt_pressed) @when-releasing)
+  tab #((press-only lalt) (layer-add alt-ed) tab)
+  ;; Alt-tab like windows end
+
+  cmd (cmd-button "ydotool mousemove 20 30")
+  ctrl  (tap-next-release f6  lctl)
+  alt   (tap-next-release f12 lalt)
+  Ms    (around lmet s)
+  tabmacro (tap-macro-release @Ms P200 @cmd P200)
+  Mtab  (tap-next-release @tabmacro @lmet)
+
+)
+
+(deflayer default
+  esc  f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12        ssrq slck pause
+  grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc  ins  home pgup  nlck kp/  kp*  kp-
+  tab  q    w    e    r    t    y    u    i    o    p    [    ]    ret   del  end  pgdn  kp7  kp8  kp9  kp+
+  caps a    s    d    f    g    h    j    k    l    ;    '    \                          kp4  kp5  kp6
+  lsft 102d z    x    c    v    b    n    m    ,    .    /    rsft            up         kp1  kp2  kp3  kprt
+  lctl M-spc @lalt          spc                @ralt lalt cmp  rctl       left down rght  kp0  kp.
+)
+
+(deflayer is_lalt_pressed
+  esc          f1       f2       f3       f4      f5     f6      f7       f8       f9       f10    f11   f12               ssrq slck pause
+  @alt         C-q      f2       C-S-p    f4      f5     C-o     A-0      A-w      del      C-0    C--   C-=     C-bspc      ins  home pgup   nlck kp/  kp*  kp-
+  @Mtab        esc      C-bspc   f3       C-r     C-t    C-y     home     up       end      esc    A--   A-=     cmp         del  end  pgdn   kp7  kp8  kp9  kp+
+  A-esc        C-a      C-s      C-d      lctl    C-spc  ret     left     down     rght     :      A-\   \                                  kp4  kp5  kp6
+  lsft  102d   C-z      C-x      C-c      C-v     C-b    C-pgup  C-pgdn   A-p      A-n      C-/          rsft                 up            kp1  kp2  kp3  kprt
+  lctl  lmet  @lalt                                    spc                             @ralt rmet cmp   rctl      left down rght     kp0  kp.
+)
+
+(deflayer is_ralt_pressed
+  esc       f1    f2   f3   f4    f5    f6      f7      f8       f9      f10    f11  f12                    ssrq slck pause
+  lalt      A-1   A-2  A-3  A-4   A-5   A-f4    C-t     A-w      del     A-l    C--  C-=    C-bspc            ins  home pgup   nlck kp/  kp*  kp-
+  A-tab     esc   C-w  f3   A-r   A-t   C-w     home    up       end     esc    A--  A-=    cmp               del  end  pgdn   kp7  kp8  kp9  kp+
+  caps      A-a   C-k  A-d  C-e   C-g   ret     left    down     rght    C-l    A-\      \                                       kp4  kp5  kp6
+  lsft 102d A-z   A-x  A-c  A-v   C-b   C-pgup  C-pgdn  A-p      A-n     C-f         rsft                        up          kp1  kp2  kp3  kprt
+  lctl lmet @lalt                                    spc                             @ralt rmet cmp   rctl  left down rght   kp0  kp.
+)
+
+(deflayer is_lmet_pressed
+  esc          f1       f2       f3       f4      f5     f6        f7        f8       f9       f10    f11   f12               ssrq slck pause
+  @alt         1        2        3        4       5      6         7         M-d      A-f4     0      _     +     C-bspc      ins  home pgup   nlck kp/  kp*  kp-
+  @Mtab        esc      w        e        r       t      y         M-left    M-up     M-rght   esc    [     ]     cmp         del  end  pgdn   kp7  kp8  kp9  kp+
+  caps         a        s        d        lsft    g      ret       left      M-down   rght     ;      '     \                                  kp4  kp5  kp6
+  lsft  102d   z        x        c        v       b      M-pgup    M-pgdn    M--      M-=      /                  rsft                 up            kp1  kp2  kp3  kprt
+  lctl  lmet  @lalt                                  M-spc                                   @ralt rmet cmp  rctl      left down rght     kp0  kp.
+)
+
+;; Alt-tab like windows
+(deflayer alt-ed
+  esc  f1   f2     f3   f4   f5   f6   f7   f8   f9   f10  f11  f12        ssrq slck pause
+  grv  1    2      3    4    5    6    7    8    9    0    -    =    bspc  ins  home pgup  nlck kp/  kp*  kp-
+  tab  esc  C-bspc C-e  C-r  C-t  C-y  home up   end  p    [    ]    ret   del  end  pgdn  kp7  kp8  kp9  kp+
+  caps C-a  C-s    C-d  lctl C-g  ret  left down rght C-l    '    \                          kp4  kp5  kp6
+  lsft 102d C-z    C-x  C-c  C-v  C-b  C-pgup  C-pgdn ,     .  C-f    rsft            up         kp1  kp2  kp3  kprt
+  lctl lmet @lalt          spc                @ralt rmet cmp  rctl       left down rght  kp0  kp.
+)
+
+
+

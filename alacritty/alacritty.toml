@@ -1,0 +1,34 @@
+live_config_reload = true
+import = ["/home/sil/.config/alacritty/themes/themes/oceanic_next.toml"]
+
+[window]
+padding = { x = 0, y = 0 }
+dynamic_title = false
+dynamic_padding = true
+opacity = 0.7
+# blur = true
+startup_mode = "Windowed"
+decorations_theme_variant = "Dark"
+decorations = "Full"
+
+[colors]
+draw_bold_text_with_bright_colors = true
+
+[font]
+normal = { family = 'JetBrains Mono Nerd Font', style = "Regular" }
+
+[selection]
+save_to_clipboard = true
+
+[env]
+term = "xterm-256color"
+
+[keyboard]
+bindings = [
+# { key = "Enter", chars="\\x1bh"},
+]
+
+# [cursor]
+# style = { shape = "Beam", blinking = "On" }
+
+

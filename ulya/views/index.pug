@@ -1,0 +1,42 @@
+include components/head.pug
+include components/header.pug
+include components/sections/slider.pug
+include components/sections/serviceSection.pug
+
+// product section 2 start
+- var products = products.slice(0, 4);
+section.ratio_asos
+      .container
+        .row.m-0
+          .col-sm-12.p-0
+          .title.title-2.text-center
+            h2.mb-5 рекомендуемые товары <br />
+            .product-wrapper.product-style-2.row.g-sm-4.g-3
+              each product in products
+                .col-xl-3.col-lg-4.col-6
+                  .product-box
+                    .img-wrapper
+                      .front
+                        a(href=`/product/${product.id}`)
+                          img.blur-up.lazyload(src=`${product.url}` alt=product.name width='261' height="348")
+                        .cart-wrap
+                          ul
+                            li
+                              //- a.addtocart-btn(href='javascript:void(0)' data-bs-toggle='modal' data-bs-target='#addtocart')
+                              //-   i(data-feather='shopping-bag')
+                              //-   |  в корзину
+                      .label-block
+                        <span class="label label-theme">#{product.sale * 100}%</span>
+                    .product-details
+                      .rating-details
+                        h3.theme-color #{product.price} сом
+                        h3.tdl #{product.price * (1 + product.sale)} сом
+                      .main-price
+                        a.font-default(href='product-left-sidebar.html')
+                          h5 #{product.name}
+
+include components/sections/timerBannerStyle2.pug
+
+
+include components/footer.pug
+include components/scripts.pug

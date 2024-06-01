@@ -1,0 +1,69 @@
+// header start
+header#home.header-style-2
+  .main-header.navbar-searchbar
+    .container-fluid-lg
+      .row
+        .col-lg-12
+          .main-menu
+            .menu-left
+              .brand-logo
+                a(href='/')
+                  img.img-fluid.blur-up.lazyload(src='/assets/images/logo_pr.png' alt='logo' width="130px")
+            nav
+              .main-navbar
+                #mainnav
+                  .toggle-nav
+                    i.fa.fa-bars.sidebar-bar
+                  ul.nav-menu
+                    li.back-btn.d-xl-none
+                      .close-btn
+                        | &Mcy;&iecy;&ncy;&yucy;
+                        span.mobile-back
+                          i.fa.fa-angle-left
+                    li.mega-menu.dropdown.ratio_40
+                      a.nav-link.menu-title(href='/shop')
+                        .gradient-title ассортимент
+                      ul.nav-submenu.menu-content
+                        li
+                          a(href='/office-shop') офисные принадлежности
+                        li
+                          a(href='/shool-shop') школьные принадлежности
+                        li
+                          a(href='/art-shop') творческие материалы
+                    li.dropdown
+                      a.nav-link.menu-title(href='/sale-shop') акции
+                    li.dropdown
+                      a.nav-link.menu-title(href='/about-us') о компании
+                    li.dropdown
+                      a.nav-link.menu-title(href='/contacts') контакты
+            .menu-right
+              ul
+                //- li
+                  //- .search-box
+                    //- i(data-feather='search')
+                li.onhover-dropdown.cart-dropdown
+                  button.btn.btn-solid-default.btn-spacing(type='button')                
+                    if isAuthenticated 
+                      a(href='/user-dashboard') 
+                        i.pe-2(data-feather='user')
+                    else
+                      a(href='/login') 
+                        i.pe-2(data-feather='user')
+                li.onhover-dropdown.cart-dropdown
+                  button.btn.btn-solid-default.btn-spacing(type='button')
+                    if isAuthenticated 
+                      a(href='/cart') 
+                        i.pe-2(data-feather='shopping-cart')
+                    else
+                      a(href='/cart') 
+                        i.pe-2(data-feather='shopping-cart')
+            .search-full
+              .input-group
+                span.input-group-text
+                  i.font-light(data-feather='search')
+                input.form-control.search-type(type='text' placeholder='Поиск..')
+                span.input-group-text.close-search
+                  i.font-light(data-feather='x')
+// header end
+
+

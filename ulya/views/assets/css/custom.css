@@ -1,0 +1,46 @@
+.onhover-dropdown.cart-dropdown button .feather {
+  margin-right: 0;
+}
+.home-style-2 .left-content .home-content h3 {
+  margin-bottom: calc((40 - 20) * ((100vw - 320px) / (1920 - 320)));
+}
+.td {
+  text-decoration: line-through;
+}
+.main-price h3 {
+  min-width: 100px;
+}
+
+header .main-navbar .nav-menu > li.dropdown .menu-title::after {
+  display: none;
+}
+.product-box .product-details h5 {
+  height: 57px;
+  width: 100%;
+}
+
+header .main-menu {
+  padding: 0;
+}
+
+header.nav-down.nav-up .main-menu {
+  padding: 0;
+}
+
+.tdl {
+  text-decoration: line-through;
+}
+
+.imgAuto {
+  margin: auto;
+  display: block;
+}
+
+.according-menu {
+  display: none;
+}
+
+.ucase {
+  text-transform: uppercase;
+  color: red;
+}
